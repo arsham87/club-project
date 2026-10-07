@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 /**
  * Store details of club memberships.
  * 
@@ -75,9 +76,14 @@ public ArrayList<Membership> purge(int month, int year){
         return null;
     }else {
         ArrayList<Membership> removals= new ArrayList();
-        for (Membership m : members) 
-        if (m.getMonth()==month && m.getYear()==year){
+        Iterator<Membership> it= members.iterator();
+        while (it.hasNext()){
+            Membership m = it.next();
+            if (m.getMonth()==month && m.getYear()==year){
             System.out.println("Membership found in" + month + "/" + year);
+            removals.add(m);
+            it.remove();
+        }
         }
         return removals;
     }
